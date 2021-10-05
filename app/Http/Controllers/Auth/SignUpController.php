@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Jobs\SendEmailJob;
-
+use App\Models\Role;
 
 class SignUpController extends Controller
 {
@@ -31,8 +31,10 @@ class SignUpController extends Controller
             'password' => Hash::make($request['password']),
             'address' => $request['address']
         ]);
-        if ($user->email_verified_at == null) {
 
+        $user->roles()->attach(Role::where('name', 'user')->first());
+
+        if ($user->email_verified_at == null) {
             dispatch(new SendEmailJob($user));
             return redirect()->route('email.verified');
         }

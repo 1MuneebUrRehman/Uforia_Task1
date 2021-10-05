@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12 mt-3">
                 <div class="card">
-                    <div class="card-header">{{ Auth::user()->username }} Dashboard</div>
+                    <div class="card-header">Edit Role</div>
 
                     <div class="card-body">
                         <table class="table table-bordered">
@@ -19,22 +19,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
-                                    <tr>
-                                        <th scope="row">{{ $user->id }}</th>
+                                <tr>
+                                    <form action="{{ route('roles.update', $user->id) }}" method="POST">
+                                        @csrf
+                                        <td>{{ $user->id }}</td>
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->email }}</td>
-
                                         <td>
                                             @foreach ($roles as $role)
-                                                {{ $user->hasRole("$role->name") }}
+                                                {{ $role->name }}
+                                                <input type="checkbox" name="{{ $role->name }}"
+                                                    {{ $user->hasRole("$role->name") ? 'checked' : '' }}>
                                             @endforeach
                                         </td>
                                         <td>
-                                            <a href="/roles/edit/{{ $user->id }}" class="btn btn-primary">Edit</a>
+                                            <button type="submit" class="btn btn-primary">Update</button>
                                         </td>
-                                    </tr>
-                                @endforeach
+                                    </form>
+                                </tr>
 
                             </tbody>
                         </table>

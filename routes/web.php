@@ -30,6 +30,11 @@ Route::middleware(['auth'])->group(
         Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
         // Logout
         Route::post('/logout', [LogOutController::class, 'index'])->name('logout');
+
+        // Roles Edit
+        Route::get('/roles/edit/{id}', [HomeController::class,'rolesEdit']);
+        // Roles Update
+        Route::post('/roles/update/{id}', [HomeController::class, 'rolesUpdate'])->name('roles.update');
     }
 );
 
