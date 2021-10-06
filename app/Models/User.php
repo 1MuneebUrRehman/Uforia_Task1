@@ -16,7 +16,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'username',
         'email',
         'password',
-        'address'
+        'address',
+        'roles'
     ];
 
     protected $hidden = [
@@ -27,18 +28,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-   public function roles()
-   {
-    return $this->belongsToMany(Role::class);
-   }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 
-   public function hasRole($role)
-   {
-       if($this->roles()->where('name', $role)->first())
-       {
-           return $role;
-       }
-       return false;
-
-   }
+    public function hasRole($role)
+    {
+        if ($this->roles()->where('name', $role)->first()) {
+            return $role;
+        }
+        return false;
+    }
 }

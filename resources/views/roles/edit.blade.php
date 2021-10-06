@@ -28,7 +28,7 @@
                                         <td>
                                             @foreach ($roles as $role)
                                                 {{ $role->name }}
-                                                <input type="checkbox" name="{{ $role->name }}"
+                                                <input type="checkbox" name="{{ $role->name }}" value="{{ $role->name }}"
                                                     {{ $user->hasRole("$role->name") ? 'checked' : '' }}>
                                             @endforeach
                                         </td>
