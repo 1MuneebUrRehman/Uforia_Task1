@@ -29,7 +29,7 @@ class SignInController extends Controller
                 return redirect()->route('dashboard');
             }
             else{
-                dd("NULL");
+                return redirect()->route('email.verified');
             }
         } else {
             return redirect('/signin')->with('error', 'Your Account not Found...!');

@@ -34,7 +34,7 @@ class SignUpController extends Controller
 
         $user->roles()->attach(Role::where('name', 'user')->first());
         if ($user->email_verified_at == null) {
-            dispatch(new SendEmailJob($user));
+            // dispatch(new SendEmailJob($user));
             return redirect()->route('email.verified');
         }
     }
